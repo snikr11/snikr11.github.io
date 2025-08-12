@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Daily Training Checklist</title>
 <style>
-  :root { --bg: #0b0c10; --panel: #16181d; --text: #e9eef8; --muted: #9aa4b2; --accent: #7cc4ff; --accent2: #9bffa0; --danger: #ffb2b2;}
+  :root { --bg: #0b0c10; --panel: #16181d; --text: #e9eef8; --muted: #9aa4b2; --accent: #7cc4ff; --accent2: #9bffa0; --danger: #ffb2b2; }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text);}
+  body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); }
   a { color: var(--accent); text-decoration: none; }
   .container { max-width: 960px; margin: 0 auto; padding: 24px; }
   header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
-  h1 { font-size: 24px; margin: 0; letter-spacing: .3px;}
+  h1 { font-size: 24px; margin: 0; letter-spacing: .3px; }
   .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   select, button, input[type="checkbox"] { accent-color: var(--accent); }
   select, button { background: var(--panel); color: var(--text); border: 1px solid #2a2f3a; border-radius: 10px; padding: 8px 12px; }
@@ -25,15 +25,19 @@
   .kpi strong { color: var(--text); }
   .workout-text pre { white-space: pre-wrap; font-family: inherit; margin: 8px 0 0; }
   .list { margin-top: 8px; }
-  .day { display:flex; align-items: start; gap: 12px; padding: 10px 8px; border-radius: 12px; border: 1px solid #252b37; margin-bottom: 8px; background: #12151c; }
+  .day { display:flex; align-items: start; gap: 12px; padding: 10px 8px; border-radius: 12px; border: 1px solid #252b37; margin-bottom: 8px; background: #12151c; cursor: pointer; }
   .day.done { opacity: .65; }
   .date { width: 120px; color: var(--muted); font-size: 12px; }
   .title { font-weight: 600; }
   .meta { color: var(--muted); font-size: 12px; }
+  .note-ind { font-size: 14px; margin-left: 6px; }
   .grow { flex: 1; }
   .progress { height: 10px; border-radius: 6px; background: #0f1218; border: 1px solid #222836; overflow: hidden; }
   .bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0%; transition: width .25s ease; }
-  .footer { color: var(--muted); font-size: 12px; margin-top: 16px;}
+  .footer { color: var(--muted); font-size: 12px; margin-top: 16px; }
+  .notes { display: grid; gap: 8px; }
+  .notes textarea { width: 100%; min-height: 96px; resize: vertical; background: #0e1218; color: var(--text); border: 1px solid #222833; border-radius: 12px; padding: 10px 12px; font-family: inherit; }
+  .saveStatus { color: var(--muted); font-size: 12px; }
 </style>
 </head>
 <body>
@@ -67,6 +71,14 @@
       <div><strong>Warm-up</strong><pre id="todayWarmup"></pre></div>
       <div><strong>Cool-down</strong><pre id="todayCooldown"></pre></div>
     </div>
+    <div class="notes">
+      <label for="todayNote"><strong>Notes</strong></label>
+      <textarea id="todayNote" placeholder="How did it feel? Pace, HR, aches, weather, etc."></textarea>
+      <div style="display:flex; align-items:center; gap:8px; justify-content: space-between;">
+        <div class="saveStatus" id="saveStatus">Idle</div>
+        <button id="clearNoteBtn" title="Clear note for this day">Clear Note</button>
+      </div>
+    </div>
     <div class="progress"><div class="bar" id="progressBar"></div></div>
   </div>
 
@@ -78,699 +90,18 @@
   <div class="footer">Data stored locally on this device with <code>localStorage</code>. You can safely refresh or go offline.</div>
 </div>
 
-<!-- Embedded plan data -->
+<!-- Embedded plan data (trimmed for brevity in this view; keep as-is in your file) -->
 <script id="workouts" type="application/json">
 [
-  {
-    "week": 1,
-    "phase": "Recovery & Base",
-    "date": "2025-08-12",
-    "day": "Tue",
-    "workout": "Run/Walk: 1:2 min x 6–8 rounds (3 mi max)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/...cles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; ... L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 5
-  },
-  {
-    "week": 1,
-    "phase": "Recovery & Base",
-    "date": "2025-08-13",
-    "day": "Wed",
-    "workout": "Strength & Mobility (30–40 min) — Bodyweight circuit: Squats, Lunges, Push-ups, Planks",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 5
-  },
-  {
-    "week": 1,
-    "phase": "Recovery & Base",
-    "date": "2025-08-14",
-    "day": "Thu",
-    "workout": "Easy Run: 2 mi conversational pace",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 5
-  },
-  {
-    "week": 1,
-    "phase": "Recovery & Base",
-    "date": "2025-08-15",
-    "day": "Fri",
-    "workout": "Rest or Cross-Train (30 min) — bike, swim, or brisk walk",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 5
-  },
-  {
-    "week": 1,
-    "phase": "Recovery & Base",
-    "date": "2025-08-16",
-    "day": "Sat",
-    "workout": "Long Run/Walk: 3 mi easy effort",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 5
-  },
-  {
-    "week": 1,
-    "phase": "Recovery & Base",
-    "date": "2025-08-17",
-    "day": "Sun",
-    "workout": "Recovery Walk: 20–30 min, optional mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 5
-  },
-  {
-    "week": 1,
-    "phase": "Recovery & Base",
-    "date": "2025-08-18",
-    "day": "Mon",
-    "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 5
-  },
-  {
-    "week": 2,
-    "phase": "Recovery & Base",
-    "date": "2025-08-19",
-    "day": "Tue",
-    "workout": "Run/Walk: 2:2 min x 6–8 rounds (3–4 mi max)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 6
-  },
-  {
-    "week": 2,
-    "phase": "Recovery & Base",
-    "date": "2025-08-20",
-    "day": "Wed",
-    "workout": "Strength & Mobility (35–45 min) — add core focus",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 6
-  },
-  {
-    "week": 2,
-    "phase": "Recovery & Base",
-    "date": "2025-08-21",
-    "day": "Thu",
-    "workout": "Easy Run: 2.5 mi",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 6
-  },
-  {
-    "week": 2,
-    "phase": "Recovery & Base",
-    "date": "2025-08-22",
-    "day": "Fri",
-    "workout": "Rest or Cross-Train (30–40 min)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 6
-  },
-  {
-    "week": 2,
-    "phase": "Recovery & Base",
-    "date": "2025-08-23",
-    "day": "Sat",
-    "workout": "Long Run: 4 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 6
-  },
-  {
-    "week": 2,
-    "phase": "Recovery & Base",
-    "date": "2025-08-24",
-    "day": "Sun",
-    "workout": "Recovery Walk: 25–35 min",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 6
-  },
-  {
-    "week": 2,
-    "phase": "Build Phase",
-    "date": "2025-08-25",
-    "day": "Mon",
-    "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 6
-  },
-  {
-    "week": 3,
-    "phase": "Build Phase",
-    "date": "2025-08-26",
-    "day": "Tue",
-    "workout": "Run: 3 mi with last 5×30s pickups",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 15
-  },
-  {
-    "week": 3,
-    "phase": "Build Phase",
-    "date": "2025-08-27",
-    "day": "Wed",
-    "workout": "Strength (40–45 min) + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 15
-  },
-  {
-    "week": 3,
-    "phase": "Build Phase",
-    "date": "2025-08-28",
-    "day": "Thu",
-    "workout": "Easy Run: 3 mi",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 15
-  },
-  {
-    "week": 3,
-    "phase": "Build Phase",
-    "date": "2025-08-29",
-    "day": "Fri",
-    "workout": "Rest or Cross-Train (35–45 min)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 15
-  },
-  {
-    "week": 3,
-    "phase": "Build Phase",
-    "date": "2025-08-30",
-    "day": "Sat",
-    "workout": "Long Run: 5 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 15
-  },
-  {
-    "week": 3,
-    "phase": "Build Phase",
-    "date": "2025-08-31",
-    "day": "Sun",
-    "workout": "Recovery Walk: 25–35 min + light mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 15
-  },
-  {
-    "week": 3,
-    "phase": "Build Phase",
-    "date": "2025-09-01",
-    "day": "Mon",
-    "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 15
-  },
-  {
-    "week": 4,
-    "phase": "Build Phase",
-    "date": "2025-09-02",
-    "day": "Tue",
-    "workout": "Run: 3.5 mi with 6×45s pickups",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 16
-  },
-  {
-    "week": 4,
-    "phase": "Build Phase",
-    "date": "2025-09-03",
-    "day": "Wed",
-    "workout": "Strength (45 min) — add single-leg work",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 16
-  },
-  {
-    "week": 4,
-    "phase": "Build Phase",
-    "date": "2025-09-04",
-    "day": "Thu",
-    "workout": "Easy Run: 3 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 16
-  },
-  {
-    "week": 4,
-    "phase": "Build Phase",
-    "date": "2025-09-05",
-    "day": "Fri",
-    "workout": "Rest or Cross-Train (40–45 min)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 16
-  },
-  {
-    "week": 4,
-    "phase": "Build Phase",
-    "date": "2025-09-06",
-    "day": "Sat",
-    "workout": "Long Run: 5.5 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 16
-  },
-  {
-    "week": 4,
-    "phase": "Build Phase",
-    "date": "2025-09-07",
-    "day": "Sun",
-    "workout": "Recovery Walk: 30 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 16
-  },
-  {
-    "week": 4,
-    "phase": "Build Phase",
-    "date": "2025-09-08",
-    "day": "Mon",
-    "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 16
-  },
-  {
-    "week": 5,
-    "phase": "Build Phase",
-    "date": "2025-09-09",
-    "day": "Tue",
-    "workout": "Run: 4 mi with 6×60s pickups",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 5,
-    "phase": "Build Phase",
-    "date": "2025-09-10",
-    "day": "Wed",
-    "workout": "Strength (45–50 min) — include hips & glutes",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 5,
-    "phase": "Build Phase",
-    "date": "2025-09-11",
-    "day": "Thu",
-    "workout": "Easy Run: 3.5 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 5,
-    "phase": "Build Phase",
-    "date": "2025-09-12",
-    "day": "Fri",
-    "workout": "Rest or Cross-Train (40–50 min)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 5,
-    "phase": "Build Phase",
-    "date": "2025-09-13",
-    "day": "Sat",
-    "workout": "Long Run: 6 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 5,
-    "phase": "Build Phase",
-    "date": "2025-09-14",
-    "day": "Sun",
-    "workout": "Recovery Walk: 30–35 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 5,
-    "phase": "Build Phase",
-    "date": "2025-09-15",
-    "day": "Mon",
-    "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 6,
-    "phase": "Build Phase",
-    "date": "2025-09-16",
-    "day": "Tue",
-    "workout": "Run: 4.5 mi with 6×60s pickups",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 19
-  },
-  {
-    "week": 6,
-    "phase": "Build Phase",
-    "date": "2025-09-17",
-    "day": "Wed",
-    "workout": "Strength (45–50 min) — add single-leg RDLs",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 19
-  },
-  {
-    "week": 6,
-    "phase": "Build Phase",
-    "date": "2025-09-18",
-    "day": "Thu",
-    "workout": "Easy Run: 3.5–4 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 19
-  },
-  {
-    "week": 6,
-    "phase": "Build Phase",
-    "date": "2025-09-19",
-    "day": "Fri",
-    "workout": "Rest or Cross-Train (40–50 min)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 19
-  },
-  {
-    "week": 6,
-    "phase": "Build Phase",
-    "date": "2025-09-20",
-    "day": "Sat",
-    "workout": "Long Run: 6.5 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 19
-  },
-  {
-    "week": 6,
-    "phase": "Build Phase",
-    "date": "2025-09-21",
-    "day": "Sun",
-    "workout": "Recovery Walk: 30–35 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 19
-  },
-  {
-    "week": 6,
-    "phase": "Build Phase",
-    "date": "2025-09-22",
-    "day": "Mon",
-    "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 19
-  },
-  {
-    "week": 7,
-    "phase": "Build Phase",
-    "date": "2025-09-23",
-    "day": "Tue",
-    "workout": "Tempo Intro: 1 mi easy + 2×8 min comfortably hard (2 min easy) + easy to 4.5 mi",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 20
-  },
-  {
-    "week": 7,
-    "phase": "Build Phase",
-    "date": "2025-09-24",
-    "day": "Wed",
-    "workout": "Strength (45–50 min) — maintain",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 20
-  },
-  {
-    "week": 7,
-    "phase": "Build Phase",
-    "date": "2025-09-25",
-    "day": "Thu",
-    "workout": "Easy Run: 4 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 20
-  },
-  {
-    "week": 7,
-    "phase": "Build Phase",
-    "date": "2025-09-26",
-    "day": "Fri",
-    "workout": "Rest or Cross-Train (40–50 min)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 20
-  },
-  {
-    "week": 7,
-    "phase": "Build Phase",
-    "date": "2025-09-27",
-    "day": "Sat",
-    "workout": "Long Run: 7 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 20
-  },
-  {
-    "week": 7,
-    "phase": "Build Phase",
-    "date": "2025-09-28",
-    "day": "Sun",
-    "workout": "Recovery Walk: 30–35 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 20
-  },
-  {
-    "week": 7,
-    "phase": "Build Phase",
-    "date": "2025-09-29",
-    "day": "Mon",
-    "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 20
-  },
-  {
-    "week": 8,
-    "phase": "Peak Phase",
-    "date": "2025-09-30",
-    "day": "Tue",
-    "workout": "Tempo: 1 mi easy + 2×10 min comfortably hard (3 min easy) + easy to 5 mi",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 22
-  },
-  {
-    "week": 8,
-    "phase": "Peak Phase",
-    "date": "2025-10-01",
-    "day": "Wed",
-    "workout": "Strength (45–50 min) — maintain",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 22
-  },
-  {
-    "week": 8,
-    "phase": "Peak Phase",
-    "date": "2025-10-02",
-    "day": "Thu",
-    "workout": "Easy Run: 4 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 22
-  },
-  {
-    "week": 8,
-    "phase": "Peak Phase",
-    "date": "2025-10-03",
-    "day": "Fri",
-    "workout": "Rest or Cross-Train (45–50 min)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 22
-  },
-  {
-    "week": 8,
-    "phase": "Peak Phase",
-    "date": "2025-10-04",
-    "day": "Sat",
-    "workout": "Long Run: 8 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 22
-  },
-  {
-    "week": 8,
-    "phase": "Peak Phase",
-    "date": "2025-10-05",
-    "day": "Sun",
-    "workout": "Recovery Walk: 35–40 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 22
-  },
-  {
-    "week": 8,
-    "phase": "Peak Phase",
-    "date": "2025-10-06",
-    "day": "Mon",
-    "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 22
-  },
-  {
-    "week": 9,
-    "phase": "Taper",
-    "date": "2025-10-07",
-    "day": "Tue",
-    "workout": "Run: 4.5 mi with 8×30s race-pace strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 9,
-    "phase": "Taper",
-    "date": "2025-10-08",
-    "day": "Wed",
-    "workout": "Strength (40 min) — reduce volume",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 9,
-    "phase": "Taper",
-    "date": "2025-10-09",
-    "day": "Thu",
-    "workout": "Easy Run: 3.5 mi",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 9,
-    "phase": "Taper",
-    "date": "2025-10-10",
-    "day": "Fri",
-    "workout": "Rest or Shakeout (easy 20 min walk)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 9,
-    "phase": "Taper",
-    "date": "2025-10-11",
-    "day": "Sat",
-    "workout": "Long Run: 6 mi relaxed (include 2 mi at goal pace)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 9,
-    "phase": "Taper",
-    "date": "2025-10-12",
-    "day": "Sun",
-    "workout": "Recovery Walk: 30–35 min + light mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 9,
-    "phase": "Taper",
-    "date": "2025-10-13",
-    "day": "Mon",
-    "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 18
-  },
-  {
-    "week": 10,
-    "phase": "Race Week",
-    "date": "2025-10-14",
-    "day": "Tue",
-    "workout": "Tune-up: 2 mi easy + 4×20s race-pace strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 4
-  },
-  {
-    "week": 10,
-    "phase": "Race Week",
-    "date": "2025-10-15",
-    "day": "Wed",
-    "workout": "Rest or 20–25 min walk",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 4
-  },
-  {
-    "week": 10,
-    "phase": "Race Week",
-    "date": "2025-10-16",
-    "day": "Thu",
-    "workout": "Shakeout: 2 mi very easy + 4×15s strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 4
-  },
-  {
-    "week": 10,
-    "phase": "Race Week",
-    "date": "2025-10-17",
-    "day": "Fri",
-    "workout": "Rest, hydrate, carb-focus",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Gentle stretch, early night",
-    "weeklyMileage": 4
-  },
-  {
-    "week": 10,
-    "phase": "Race Week",
-    "date": "2025-10-18",
-    "day": "Sat",
-    "workout": "Shakeout: 15–20 min jog + 4×10s strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Light stretch, lay out gear",
-    "weeklyMileage": 4
-  },
-  {
-    "week": 10,
-    "phase": "Race Week",
-    "date": "2025-10-19",
-    "day": "Sun",
-    "workout": "RACE DAY – Half Marathon!",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/...cles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; ... L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
-    "weeklyMileage": 4
-  }
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-12","day":"Tue","workout":"Run/Walk: 1:2 min x 6–8 rounds (3 mi max)","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/...cles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; ... L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-13","day":"Wed","workout":"Strength & Mobility (30–40 min) — Bodyweight circuit: Squats, Lunges, Push-ups, Planks","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-14","day":"Thu","workout":"Easy Run: 2 mi conversational pace","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-15","day":"Fri","workout":"Rest or Cross-Train (30 min) — bike, swim, or brisk walk","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-16","day":"Sat","workout":"Long Run/Walk: 3 mi easy effort","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-17","day":"Sun","workout":"Recovery Walk: 20–30 min, optional mobility","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-18","day":"Mon","workout":"Rest Day","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+  {"week":2,"phase":"Recovery & Base","date":"2025-08-19","day":"Tue","workout":"Run/Walk: 2:2 min x 6–8 rounds (3–4 mi max)","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":6},
+  {"week":10,"phase":"Race Week","date":"2025-10-19","day":"Sun","workout":"RACE DAY – Half Marathon!","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/...cles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; ... L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":4}
 ]
 </script>
 
@@ -793,6 +124,10 @@
   const progressText = document.getElementById('progressText');
   const progressBar = document.getElementById('progressBar');
 
+  const todayNote = document.getElementById('todayNote');
+  const saveStatus = document.getElementById('saveStatus');
+  const clearNoteBtn = document.getElementById('clearNoteBtn');
+
   const byWeek = groupBy(data, x => x.week);
   const weeks = Object.keys(byWeek).map(Number).sort((a,b)=>a-b);
 
@@ -805,7 +140,7 @@
   }
 
   // choose initial week: today's week if in plan; else first
-  const todayISO = new Date().toISOString().slice(0,10);
+  const todayISO = todayLocalISO();
   const todayIdx = data.findIndex(d => d.date === todayISO);
   const initialWeek = todayIdx >= 0 ? data[todayIdx].week : weeks[0];
   weekSelect.value = String(initialWeek);
@@ -841,7 +176,14 @@
     if (!confirm('Clear completion for all days in this week?')) return;
     const w = Number(weekSelect.value);
     for (const d of byWeek[w]) setDone(d.date, false);
-    renderWeek(); updateProgress(); renderToday(data.findIndex(d=>d.date===document.querySelector('.day[data-today]').dataset.date));
+    renderWeek();
+    updateProgress();
+    const current = document.querySelector('.day[data-today]');
+    const curDate = current ? current.dataset.date : byWeek[w][0]?.date;
+    if (curDate){
+      const idx = data.findIndex(d=>d.date===curDate);
+      if (idx>=0) renderToday(idx);
+    }
   });
 
   todayDone.addEventListener('change', ()=>{
@@ -851,6 +193,32 @@
     const row = document.querySelector(`.day input[type=checkbox][data-date="${cssEscape(date)}"]`);
     if (row) row.checked = todayDone.checked, row.closest('.day').classList.toggle('done', todayDone.checked);
     updateProgress();
+  });
+
+  // Notes save (debounced) + clear
+  let noteTimer = null;
+  todayNote.addEventListener('input', ()=>{
+    setSaveStatus('Saving…');
+    clearTimeout(noteTimer);
+    const date = todayNote.dataset.date;
+    const val = todayNote.value;
+    noteTimer = setTimeout(()=>{
+      setNote(date, val.trim());
+      setSaveStatus(val.trim() ? 'Saved' : 'Cleared');
+      // update indicator on week row
+      const meta = document.querySelector(`.day[data-date="${cssEscape(date)}"] .meta`);
+      if (meta){
+        let ind = meta.querySelector('.note-ind');
+        if (val.trim()){
+          if (!ind){ ind = document.createElement('span'); ind.className='note-ind'; ind.textContent='📝'; meta.appendChild(ind); }
+        } else if (ind){ ind.remove(); }
+      }
+    }, 350);
+  });
+
+  clearNoteBtn.addEventListener('click', ()=>{
+    todayNote.value = '';
+    todayNote.dispatchEvent(new Event('input'));
   });
 
   function renderWeek(){
@@ -872,6 +240,7 @@
         if (todayDone.dataset.date === d.date) todayDone.checked = checkbox.checked;
         updateProgress();
       });
+      checkbox.addEventListener('click', ev => ev.stopPropagation());
 
       const date = document.createElement('div');
       date.className = 'date';
@@ -885,9 +254,21 @@
       const meta = document.createElement('div');
       meta.className = 'meta';
       meta.textContent = `${d.day} • ${d.phase}`;
+      if (getNote(d.date)) {
+        const ind = document.createElement('span');
+        ind.className = 'note-ind';
+        ind.textContent = '📝';
+        meta.appendChild(ind);
+      }
       main.append(title, meta);
 
       li.append(checkbox, date, main);
+      li.addEventListener('click', ()=>{
+        const idx = data.findIndex(x => x.date === d.date);
+        renderToday(idx);
+        li.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+
       weekList.append(li);
     }
     updateProgress();
@@ -908,6 +289,9 @@
     todayCooldown.textContent = d.cooldown;
     todayDone.checked = getDone(d.date);
     todayDone.dataset.date = d.date;
+    todayNote.value = getNote(d.date);
+    todayNote.dataset.date = d.date;
+    setSaveStatus('Idle');
   }
 
   function updateProgress(){
@@ -923,6 +307,9 @@
   function key(date){ return 'workoutDone:' + date; }
   function getDone(date){ return localStorage.getItem(key(date)) === '1'; }
   function setDone(date, val){ localStorage.setItem(key(date), val ? '1' : '0'); }
+  function noteKey(date){ return 'workoutNote:' + date; }
+  function getNote(date){ return localStorage.getItem(noteKey(date)) || ''; }
+  function setNote(date, val){ if (!val) localStorage.removeItem(noteKey(date)); else localStorage.setItem(noteKey(date), val); }
 
   // utils
   function formatDate(iso){
@@ -938,9 +325,19 @@
     for (let i=0;i<arr.length;i++){ const diff = Math.abs(new Date(arr[i].date).getTime() - t); if (diff < bestDiff) bestDiff = diff, bestIdx = i; }
     return bestIdx;
   }
-  // polyfill safer selector
-  function cssEscape(s){ return s.replace(/["\\\\]/g, "\\\\$&"); }
-
+  function scrollToDay(date){
+    const row = document.querySelector(`.day[data-date="${cssEscape(date)}"]`);
+    if (row) row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  function cssEscape(s){ return s.replace(/["\\]/g, "\\$&"); }
+  function todayLocalISO(){
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,'0');
+    const day = String(d.getDate()).padStart(2,'0');
+    return `${y}-${m}-${day}`;
+  }
 })();
 </script>
-</body></html>
+</body>
+</html>
