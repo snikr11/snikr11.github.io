@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '', // Important for GitHub Pages root domain
-  build: {
-    outDir: 'dist'
-  }
-});
+  base: '',            // important for root domain
+  plugins: [react()],
+  build: { outDir: 'dist' }
+})
