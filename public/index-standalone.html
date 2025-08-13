@@ -24,6 +24,14 @@
   .kpi { background: #111319; border: 1px solid #202635; padding: 8px 12px; border-radius: 12px; font-size: 13px; color: var(--muted); }
   .kpi strong { color: var(--text); }
   .workout-text pre { white-space: pre-wrap; font-family: inherit; margin: 8px 0 0; }
+/* checklist styles */
+.tasks { display: grid; gap: 12px; }
+.section-title { font-weight: 600; margin: 4px 0; }
+.task-list { display: grid; gap: 6px; }
+.task { display: flex; align-items: flex-start; gap: 8px; }
+.task input[type="checkbox"] { margin-top: 2px; }
+.chip { display:inline-block; border:1px solid #2a2f3a; border-radius:999px; padding:2px 8px; font-size:12px; color: var(--muted); }
+.day .chip { margin-left: 8px; }
   .list { margin-top: 8px; }
   .day { display:flex; align-items: start; gap: 12px; padding: 10px 8px; border-radius: 12px; border: 1px solid #252b37; margin-bottom: 8px; background: #12151c; cursor: pointer; }
   .day.done { opacity: .65; }
@@ -66,8 +74,20 @@
       <div class="kpi">Week mileage: <strong id="todayMileage"></strong> mi</div>
       <div class="kpi">Progress: <strong id="progressText"></strong></div>
     </div>
-    <div class="workout-text">
-      <div><strong>Workout</strong><pre id="todayWorkout"></pre></div>
+    <section class="tasks">
+      <div class="group">
+        <div class="section-title">Warm-up</div>
+        <div id="listWarmup" class="task-list"></div>
+      </div>
+      <div class="group">
+        <div class="section-title">Workout</div>
+        <label class="task"><input type="checkbox" id="workoutChk"/> <span id="workoutText"></span></label>
+      </div>
+      <div class="group">
+        <div class="section-title">Cool-down</div>
+        <div id="listCooldown" class="task-list"></div>
+      </div>
+    </section>
       <div><strong>Warm-up</strong><pre id="todayWarmup"></pre></div>
       <div><strong>Cool-down</strong><pre id="todayCooldown"></pre></div>
     </div>
@@ -115,9 +135,10 @@
   const todayMeta = document.getElementById('todayMeta');
   const todayPhase = document.getElementById('todayPhase');
   const todayMileage = document.getElementById('todayMileage');
-  const todayWorkout = document.getElementById('todayWorkout');
-  const todayWarmup = document.getElementById('todayWarmup');
-  const todayCooldown = document.getElementById('todayCooldown');
+  const listWarmup = document.getElementById('listWarmup');
+  const listCooldown = document.getElementById('listCooldown');
+  const workoutChk = document.getElementById('workoutChk');
+  const workoutText = document.getElementById('workoutText');
   const todayDone = document.getElementById('todayDone');
   const progressText = document.getElementById('progressText');
   const progressBar = document.getElementById('progressBar');
@@ -185,8 +206,12 @@
   });
 
   todayDone.addEventListener('change', ()=>{
-    const date = todayDone.dataset.date;
-    setDone(date, todayDone.checked);
+    if (!currentDay) return;
+    setAllDay(currentDay, todayDone.checked);
+    // Rebuild lists to reflect the toggle
+    renderToday(currentDayIndex);
+    updateProgress();
+  });
     // update the corresponding row checkbox
     const row = document.querySelector(`.day input[type=checkbox][data-date="${cssEscape(date)}"]`);
     if (row) row.checked = todayDone.checked, row.closest('.day').classList.toggle('done', todayDone.checked);
@@ -226,18 +251,42 @@
       const li = document.createElement('div');
       li.className = 'day';
       li.dataset.date = d.date;
-      const checked = getDone(d.date);
-      if (checked) li.classList.add('done');
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.checked = checked;
-      checkbox.dataset.date = d.date;
-      checkbox.addEventListener('change', ()=>{
-        setDone(d.date, checkbox.checked);
-        li.classList.toggle('done', checkbox.checked);
-        if (todayDone.dataset.date === d.date) todayDone.checked = checkbox.checked;
-        updateProgress();
+
+      const date = document.createElement('div');
+      date.className = 'date';
+      date.textContent = formatDate(d.date);
+
+      const main = document.createElement('div');
+      main.className = 'grow';
+      const title = document.createElement('div');
+      title.className = 'title';
+      title.textContent = d.workout;
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.textContent = `${d.day} • ${d.phase}`;
+      if (getNote(d.date)) {
+        const ind = document.createElement('span');
+        ind.className = 'note-ind';
+        ind.textContent = '📝';
+        meta.appendChild(ind);
+      }
+      const chip = document.createElement('span');
+      chip.className = 'chip';
+      chip.dataset.date = d.date;
+      main.append(title, meta, chip);
+
+      li.append(date, main);
+      li.addEventListener('click', ()=>{
+        const idx = data.findIndex(x => x.date === d.date);
+        renderToday(idx);
+        li.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
+
+      weekList.append(li);
+      updateWeekRowMeta(d);
+    }
+    updateProgress();
+  });
       checkbox.addEventListener('click', ev => ev.stopPropagation());
 
       const date = document.createElement('div');
@@ -273,31 +322,43 @@
   }
 
   function renderToday(idx){
+    currentDayIndex = idx;
     const d = data[idx];
+    currentDay = d;
     document.querySelectorAll('.day').forEach(el=>el.removeAttribute('data-today'));
-    const row = document.querySelector(`.day input[type=checkbox][data-date="${cssEscape(d.date)}"]`);
-    if (row) row.closest('.day').setAttribute('data-today','true');
+    const row = document.querySelector(`.day[data-date="${cssEscape(d.date)}"]`);
+    if (row) row.setAttribute('data-today','true');
 
     todayTitle.textContent = `${formatDate(d.date)} • Week ${d.week}`;
     todayMeta.textContent = `${d.day} — ${d.phase}`;
     todayPhase.textContent = d.phase;
     todayMileage.textContent = d.weeklyMileage ?? '';
-    todayWorkout.textContent = d.workout;
-    todayWarmup.textContent = d.warmup;
-    todayCooldown.textContent = d.cooldown;
-    todayDone.checked = getDone(d.date);
-    todayDone.dataset.date = d.date;
+
+    // Build tasks
+    buildTaskList(listWarmup, splitTasks(d.warmup), d.date, 'warm');
+    workoutText.textContent = d.workout || 'Workout';
+    workoutChk.checked = getSub(d.date, 'workout', 0);
+    workoutChk.onchange = () => { setSub(d.date, 'workout', 0, workoutChk.checked); syncTodayCompletion(d); };
+    buildTaskList(listCooldown, splitTasks(d.cooldown), d.date, 'cool');
+
+    // Notes
     todayNote.value = getNote(d.date);
     todayNote.dataset.date = d.date;
     setSaveStatus('Idle');
+
+    // Sync completion checkbox
+    syncTodayCompletion(d);
   }
 
   function updateProgress(){
     const w = Number(weekSelect.value);
-    const days = byWeek[w];
-    const done = days.reduce((acc, d)=> acc + (getDone(d.date)?1:0), 0);
-    const pct = Math.round((done / days.length) * 100);
-    progressText.textContent = `${done}/${days.length} (${pct}%)`;
+    const days = byWeek[w] || [];
+    let done = 0, total = 0;
+    for (const d of days){ const t = getDayTotals(d); done += t.done; total += t.total; }
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    progressText.textContent = `${done}/${total} (${pct}%)`;
+    progressBar.style.width = pct + '%';
+  }/${days.length} (${pct}%)`;
     progressBar.style.width = pct + '%';
   }
 
@@ -309,6 +370,64 @@
   function getNote(date){ return localStorage.getItem(noteKey(date)) || ''; }
   function setNote(date, val){ if (!val) localStorage.removeItem(noteKey(date)); else localStorage.setItem(noteKey(date), val); }
 
+  // subtask storage
+  function subKey(date, section, idx){ return `sub:${date}:${section}:${idx}`; }
+  function getSub(date, section, idx){ return localStorage.getItem(subKey(date, section, idx)) === '1'; }
+  function setSub(date, section, idx, val){ localStorage.setItem(subKey(date, section, idx), val ? '1' : '0'); }
+
+  function splitTasks(s){ return (s||'').split(';').map(x=>x.trim()).filter(Boolean); }
+  function getDayTotals(d){
+    const warm = splitTasks(d.warmup); const cool = splitTasks(d.cooldown);
+    const total = warm.length + 1 + cool.length; // +1 for workout
+    let done = 0;
+    for (let i=0;i<warm.length;i++) if (getSub(d.date,'warm',i)) done++;
+    if (getSub(d.date,'workout',0)) done++;
+    for (let i=0;i<cool.length;i++) if (getSub(d.date,'cool',i)) done++;
+    return { done, total };
+  }
+  function setAllDay(d, val){
+    const warm = splitTasks(d.warmup); const cool = splitTasks(d.cooldown);
+    for (let i=0;i<warm.length;i++) setSub(d.date,'warm',i,val);
+    setSub(d.date,'workout',0,val);
+    for (let i=0;i<cool.length;i++) setSub(d.date,'cool',i,val);
+    setDone(d.date, val);
+    updateWeekRowMeta(d);
+  }
+  function buildTaskList(container, items, date, section){
+    container.innerHTML='';
+    items.forEach((text, idx)=>{
+      const label = document.createElement('label');
+      label.className='task';
+      const cb = document.createElement('input');
+      cb.type='checkbox';
+      cb.checked = getSub(date, section, idx);
+      cb.addEventListener('change', ()=>{ setSub(date, section, idx, cb.checked); syncTodayCompletion(currentDay); });
+      const span = document.createElement('span');
+      span.textContent = text;
+      label.append(cb, span);
+      container.append(label);
+    });
+  }
+  function syncTodayCompletion(d){
+    const t = getDayTotals(d);
+    const completed = t.done === t.total && t.total > 0;
+    todayDone.checked = completed;
+    setDone(d.date, completed);
+    updateWeekRowMeta(d);
+    updateProgress();
+  }
+  function updateWeekRowMeta(d){
+    const row = document.querySelector(`.day[data-date="${cssEscape(d.date)}"]`);
+    if (!row) return;
+    const chip = row.querySelector('.chip');
+    const t = getDayTotals(d);
+    const completed = t.done === t.total && t.total>0;
+    row.classList.toggle('done', completed);
+    if (chip){ chip.textContent = completed ? '✅ Completed' : `${t.done}/${t.total}`; }
+  }
+
+  function setSaveStatus(s){ saveStatus.textContent = s; }(date, val){ if (!val) localStorage.removeItem(noteKey(date)); else localStorage.setItem(noteKey(date), val); }
+
   // utils
   function formatDate(iso){
     const d = new Date(iso+'T00:00:00');
@@ -317,6 +436,7 @@
   function groupBy(arr, f){
     return arr.reduce((acc, x)=>{ const k=f(x); (acc[k]=acc[k]||[]).push(x); return acc; },{});
   }
+  let currentDay = null, currentDayIndex = 0;
   function closestIndexByDate(arr, target){
     const t = target.getTime();
     let bestIdx = 0, bestDiff = Infinity;
