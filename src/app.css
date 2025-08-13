@@ -22,12 +22,11 @@ a { color: var(--accent); text-decoration: none; }
 .container { max-width: 960px; margin: 0 auto; padding: 24px; }
 
 /* Header */
-.hdr {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; margin-bottom: 16px;
-}
+.hdr { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
 h1 { font-size: 24px; margin: 0; letter-spacing: .3px; }
 .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+/* space between "Week" label and select */
+.controls label { display: inline-flex; align-items: center; gap: 8px; }
 
 /* Form elements */
 select, button, input[type="checkbox"] { accent-color: var(--accent); }
@@ -56,15 +55,20 @@ button:disabled { opacity: .6; }
 }
 .kpi strong { color: var(--text); }
 
-/* (legacy) pre blocks; harmless if unused */
+/* legacy pre (harmless if unused) */
 .workout-text pre { white-space: pre-wrap; font-family: inherit; margin: 8px 0 0; }
 
 /* Checklist */
 .tasks { display: grid; gap: 12px; }
 .section-title { font-weight: 600; margin: 4px 0; }
 .task-list { display: grid; gap: 6px; }
-.task { display: flex; align-items: flex-start; gap: 8px; }
-.task input[type="checkbox"] { margin-top: 2px; }
+
+/* Center the checkbox with its line of text */
+.task { display: flex; align-items: center; gap: 8px; }
+.task input[type="checkbox"] {
+  margin: 0;             /* no top offset */
+  transform: translateY(1px); /* subtle downward nudge; tweak to 0px or 2px if you prefer */
+}
 
 /* Week list */
 .list { margin-top: 8px; }
