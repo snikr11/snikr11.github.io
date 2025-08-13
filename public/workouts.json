@@ -5,8 +5,8 @@
     "date": "2025-08-12",
     "day": "Tue",
     "workout": "Run/Walk: 1:2 min x 6–8 rounds (3 mi max)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/...cles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; ... L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 5
   },
   {
@@ -15,7 +15,7 @@
     "date": "2025-08-13",
     "day": "Wed",
     "workout": "Cross-train 30–40 min (bike, pool, elliptical)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 5
   },
@@ -25,7 +25,7 @@
     "date": "2025-08-14",
     "day": "Thu",
     "workout": "Run/Walk: 1:2 min x 6–8 rounds (3 mi max)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 5
   },
@@ -35,7 +35,7 @@
     "date": "2025-08-15",
     "day": "Fri",
     "workout": "Weight Lifting – Power & Posterior Chain: Romanian Deadlift, Bent-over Row, Hip Thrust, Split Squat",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 5
   },
@@ -45,7 +45,7 @@
     "date": "2025-08-16",
     "day": "Sat",
     "workout": "Long walk/jog: 4–5 miles",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 5
   },
@@ -55,7 +55,7 @@
     "date": "2025-08-17",
     "day": "Sun",
     "workout": "Recovery Walk 20–30 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 5
   },
@@ -65,8 +65,8 @@
     "date": "2025-08-18",
     "day": "Mon",
     "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",,
     "weeklyMileage": 5
   },
   {
@@ -75,7 +75,7 @@
     "date": "2025-08-19",
     "day": "Tue",
     "workout": "Run/Walk: 2:2 min x 6–8 rounds (3–4 mi max)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 6
   },
@@ -85,7 +85,7 @@
     "date": "2025-08-20",
     "day": "Wed",
     "workout": "Cross-train 35–45 min (bike, pool, elliptical)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 6
   },
@@ -95,7 +95,7 @@
     "date": "2025-08-21",
     "day": "Thu",
     "workout": "Run/Walk: 2:2 min x 6–8 rounds (3–4 mi max)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 6
   },
@@ -105,7 +105,7 @@
     "date": "2025-08-22",
     "day": "Fri",
     "workout": "Weight Lifting – Power & Posterior Chain: Romanian Deadlift, Bent-over Row, Hip Thrust, Split Squat",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 6
   },
@@ -115,7 +115,7 @@
     "date": "2025-08-23",
     "day": "Sat",
     "workout": "Long walk/jog: 4–5 miles",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 6
   },
@@ -125,7 +125,7 @@
     "date": "2025-08-24",
     "day": "Sun",
     "workout": "Recovery Walk 25–35 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 6
   },
@@ -135,7 +135,7 @@
     "date": "2025-08-25",
     "day": "Mon",
     "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 6
   },
@@ -145,7 +145,7 @@
     "date": "2025-08-26",
     "day": "Tue",
     "workout": "Run 3 mi with 5×30s pickups",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 15
   },
@@ -155,7 +155,7 @@
     "date": "2025-08-27",
     "day": "Wed",
     "workout": "Cross-train 40–45 min (add core)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 15
   },
@@ -165,7 +165,7 @@
     "date": "2025-08-28",
     "day": "Thu",
     "workout": "Easy Run 3 mi",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 15
   },
@@ -175,7 +175,7 @@
     "date": "2025-08-29",
     "day": "Fri",
     "workout": "Weight Lifting – Power & Posterior Chain",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 15
   },
@@ -185,7 +185,7 @@
     "date": "2025-08-30",
     "day": "Sat",
     "workout": "Long Run 5 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 15
   },
@@ -195,7 +195,7 @@
     "date": "2025-08-31",
     "day": "Sun",
     "workout": "Recovery Walk 25–35 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 15
   },
@@ -205,7 +205,7 @@
     "date": "2025-09-01",
     "day": "Mon",
     "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 15
   },
@@ -215,7 +215,7 @@
     "date": "2025-09-02",
     "day": "Tue",
     "workout": "Run 3.5 mi with 6×45s pickups",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 16
   },
@@ -225,7 +225,7 @@
     "date": "2025-09-03",
     "day": "Wed",
     "workout": "Cross-train 45 min (single-leg focus)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 16
   },
@@ -235,7 +235,7 @@
     "date": "2025-09-04",
     "day": "Thu",
     "workout": "Easy Run 3 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 16
   },
@@ -245,7 +245,7 @@
     "date": "2025-09-05",
     "day": "Fri",
     "workout": "Weight Lifting – Power & Posterior Chain",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 16
   },
@@ -255,7 +255,7 @@
     "date": "2025-09-06",
     "day": "Sat",
     "workout": "Long Run 5.5 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 16
   },
@@ -265,7 +265,7 @@
     "date": "2025-09-07",
     "day": "Sun",
     "workout": "Recovery Walk 30 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 16
   },
@@ -275,7 +275,7 @@
     "date": "2025-09-08",
     "day": "Mon",
     "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 16
   },
@@ -285,7 +285,7 @@
     "date": "2025-09-09",
     "day": "Tue",
     "workout": "Run 4 mi with 6×60s pickups",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -295,7 +295,7 @@
     "date": "2025-09-10",
     "day": "Wed",
     "workout": "Cross-train 45–50 min (hips & glutes)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -305,7 +305,7 @@
     "date": "2025-09-11",
     "day": "Thu",
     "workout": "Easy Run 3.5 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -315,7 +315,7 @@
     "date": "2025-09-12",
     "day": "Fri",
     "workout": "Weight Lifting – Power & Posterior Chain",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -325,7 +325,7 @@
     "date": "2025-09-13",
     "day": "Sat",
     "workout": "Long Run 6 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -335,7 +335,7 @@
     "date": "2025-09-14",
     "day": "Sun",
     "workout": "Recovery Walk 30–35 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -345,7 +345,7 @@
     "date": "2025-09-15",
     "day": "Mon",
     "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -355,7 +355,7 @@
     "date": "2025-09-16",
     "day": "Tue",
     "workout": "Run 4.5 mi with 6×60s pickups",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 19
   },
@@ -365,7 +365,7 @@
     "date": "2025-09-17",
     "day": "Wed",
     "workout": "Cross-train 45–50 min (single-leg RDLs)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 19
   },
@@ -375,7 +375,7 @@
     "date": "2025-09-18",
     "day": "Thu",
     "workout": "Easy Run 3.5–4 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 19
   },
@@ -385,7 +385,7 @@
     "date": "2025-09-19",
     "day": "Fri",
     "workout": "Weight Lifting – Power & Posterior Chain",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 19
   },
@@ -395,7 +395,7 @@
     "date": "2025-09-20",
     "day": "Sat",
     "workout": "Long Run 6.5 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 19
   },
@@ -405,7 +405,7 @@
     "date": "2025-09-21",
     "day": "Sun",
     "workout": "Recovery Walk 30–35 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 19
   },
@@ -415,7 +415,7 @@
     "date": "2025-09-22",
     "day": "Mon",
     "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 19
   },
@@ -425,7 +425,7 @@
     "date": "2025-09-23",
     "day": "Tue",
     "workout": "Tempo Intro: 1 mi easy + 2×8 min comfortably hard (2 min easy) + easy to 4.5 mi",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 20
   },
@@ -435,7 +435,7 @@
     "date": "2025-09-24",
     "day": "Wed",
     "workout": "Cross-train 45–50 min (maintain)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 20
   },
@@ -445,7 +445,7 @@
     "date": "2025-09-25",
     "day": "Thu",
     "workout": "Easy Run 4 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 20
   },
@@ -455,7 +455,7 @@
     "date": "2025-09-26",
     "day": "Fri",
     "workout": "Weight Lifting – Power & Posterior Chain",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 20
   },
@@ -465,7 +465,7 @@
     "date": "2025-09-27",
     "day": "Sat",
     "workout": "Long Run 7 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 20
   },
@@ -475,7 +475,7 @@
     "date": "2025-09-28",
     "day": "Sun",
     "workout": "Recovery Walk 30–35 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 20
   },
@@ -485,7 +485,7 @@
     "date": "2025-09-29",
     "day": "Mon",
     "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 20
   },
@@ -495,7 +495,7 @@
     "date": "2025-09-30",
     "day": "Tue",
     "workout": "Tempo: 1 mi easy + 2×10 min comfortably hard (3 min easy) + easy to 5 mi",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 22
   },
@@ -505,7 +505,7 @@
     "date": "2025-10-01",
     "day": "Wed",
     "workout": "Cross-train 45–50 min (maintain)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 22
   },
@@ -515,7 +515,7 @@
     "date": "2025-10-02",
     "day": "Thu",
     "workout": "Easy Run 4 mi + strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 22
   },
@@ -525,7 +525,7 @@
     "date": "2025-10-03",
     "day": "Fri",
     "workout": "Weight Lifting – Power & Posterior Chain",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 22
   },
@@ -535,7 +535,7 @@
     "date": "2025-10-04",
     "day": "Sat",
     "workout": "Long Run 8 mi easy",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 22
   },
@@ -545,7 +545,7 @@
     "date": "2025-10-05",
     "day": "Sun",
     "workout": "Recovery Walk 35–40 min + mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 22
   },
@@ -555,7 +555,7 @@
     "date": "2025-10-06",
     "day": "Mon",
     "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 22
   },
@@ -565,7 +565,7 @@
     "date": "2025-10-07",
     "day": "Tue",
     "workout": "Run 4.5 mi with 8×30s race-pace strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -575,7 +575,7 @@
     "date": "2025-10-08",
     "day": "Wed",
     "workout": "Cross-train 40 min (reduce volume)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -585,7 +585,7 @@
     "date": "2025-10-09",
     "day": "Thu",
     "workout": "Easy Run 3.5 mi",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -595,7 +595,7 @@
     "date": "2025-10-10",
     "day": "Fri",
     "workout": "Shakeout walk 20 min (optional)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -605,7 +605,7 @@
     "date": "2025-10-11",
     "day": "Sat",
     "workout": "Long Run 6 mi relaxed (include 2 mi at goal pace)",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -615,7 +615,7 @@
     "date": "2025-10-12",
     "day": "Sun",
     "workout": "Recovery Walk 30–35 min + light mobility",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -625,7 +625,7 @@
     "date": "2025-10-13",
     "day": "Mon",
     "workout": "Rest Day",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 18
   },
@@ -635,7 +635,7 @@
     "date": "2025-10-14",
     "day": "Tue",
     "workout": "Tune-up: 2 mi easy + 4×20s race-pace strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 4
   },
@@ -645,7 +645,7 @@
     "date": "2025-10-15",
     "day": "Wed",
     "workout": "Rest or 20–25 min walk",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 4
   },
@@ -655,7 +655,7 @@
     "date": "2025-10-16",
     "day": "Thu",
     "workout": "Shakeout: 2 mi very easy + 4×15s strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 4
   },
@@ -665,7 +665,7 @@
     "date": "2025-10-17",
     "day": "Fri",
     "workout": "Rest, hydrate, carb-focus",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Gentle stretch, early night",
     "weeklyMileage": 4
   },
@@ -675,7 +675,7 @@
     "date": "2025-10-18",
     "day": "Sat",
     "workout": "Shakeout: 15–20 min jog + 4×10s strides",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
     "cooldown": "Light stretch, lay out gear",
     "weeklyMileage": 4
   },
@@ -685,8 +685,8 @@
     "date": "2025-10-19",
     "day": "Sun",
     "workout": "RACE DAY – Half Marathon!",
-    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/...cles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
-    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; ... L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
+    "warmup": "Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps",
+    "cooldown": "Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R",
     "weeklyMileage": 4
   }
 ]
