@@ -11,7 +11,7 @@ export default function App(){
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/workouts.json', { cache: 'no-store' })
+        const res = await fetch('workouts.json', { cache: 'no-store' })
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const json = await res.json()
         setData(json)
