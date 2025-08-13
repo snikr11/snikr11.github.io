@@ -1,48 +1,10 @@
-// === FILE: src/main.jsx ===
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import './app.css'
+import './app.css'   // <-- keep this line
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 )
-
-
-// === FILE: src/app.css ===
-:root { --bg: #0b0c10; --panel: #16181d; --text: #e9eef8; --muted: #9aa4b2; --accent: #7cc4ff; --accent2: #9bffa0; }
-* { box-sizing: border-box; }
-html, body, #root { height: 100%; }
-body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); }
-a { color: var(--accent); text-decoration: none; }
-.container { max-width: 960px; margin: 0 auto; padding: 24px; }
-.hdr { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
-h1 { font-size: 24px; margin: 0; letter-spacing: .3px; }
-.controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-select, button, input[type="checkbox"] { accent-color: var(--accent); }
-select, button { background: var(--panel); color: var(--text); border: 1px solid #2a2f3a; border-radius: 10px; padding: 8px 12px; }
-button.primary { background: linear-gradient(180deg, #1e88e5, #1565c0); border: none; }
-button:disabled { opacity: .6; }
-.panel { background: var(--panel); border: 1px solid #222833; border-radius: 16px; padding: 16px; margin-top: 16px; }
-.today { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.today-header { display:flex; justify-content: space-between; align-items: center; gap: 12px; }
-.kpis { display:flex; gap: 16px; flex-wrap: wrap; }
-.kpi { background: #111319; border: 1px solid #202635; padding: 8px 12px; border-radius: 12px; font-size: 13px; color: var(--muted); }
-.kpi strong { color: var(--text); }
-.workout-text pre { white-space: pre-wrap; font-family: inherit; margin: 8px 0 0; }
-.list { margin-top: 8px; }
-.day { display:flex; align-items: start; gap: 12px; padding: 10px 8px; border-radius: 12px; border: 1px solid #252b37; margin-bottom: 8px; background: #12151c; cursor: pointer; }
-.day.done { opacity: .65; }
-.date { width: 120px; color: var(--muted); font-size: 12px; }
-.title { font-weight: 600; }
-.meta { color: var(--muted); font-size: 12px; }
-.note-ind { font-size: 14px; margin-left: 6px; }
-.grow { flex: 1; }
-.progress { height: 10px; border-radius: 6px; background: #0f1218; border: 1px solid #222836; overflow: hidden; margin-top: 6px; }
-.bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0%; transition: width .25s ease; }
-.footer { color: var(--muted); font-size: 12px; margin-top: 16px; }
-.notes { display: grid; gap: 8px; }
-.notes textarea { width: 100%; min-height: 96px; resize: vertical; background: #0e1218; color: var(--text); border: 1px solid #222833; border-radius: 12px; padding: 10px 12px; font-family: inherit; }
-.row { display:flex; align-items:center; gap:8px; justify-content: space-between; }
