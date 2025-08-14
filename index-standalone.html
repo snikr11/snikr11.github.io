@@ -1,12 +1,335 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daily Training Checklist</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Training Checklist (Standalone)</title>
+  <style>
+    :root { --bg:#0b0c10; --panel:#16181d; --text:#e9eef8; --muted:#9aa4b2; --accent:#7cc4ff; --accent2:#9bffa0; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:960px;margin:0 auto;padding:24px}
+    .hdr{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+    h1{font-size:24px;margin:0;letter-spacing:.3px}
+    .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    /* space between "Week" and dropdown */
+    .controls label{display:inline-flex;align-items:center;gap:8px}
+    select,button,input[type="checkbox"]{accent-color:var(--accent)}
+    select,button{background:var(--panel);color:var(--text);border:1px solid #2a2f3a;border-radius:10px;padding:8px 12px}
+    button.primary{background:linear-gradient(180deg,#1e88e5,#1565c0);border:none}
+    .panel{background:var(--panel);border:1px solid #222833;border-radius:16px;padding:16px;margin-top:16px}
+    .today{display:grid;grid-template-columns:1fr;gap:12px}
+    .today-header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .kpis{display:flex;gap:16px;flex-wrap:wrap}
+    .kpi{background:#111319;border:1px solid #202635;padding:8px 12px;border-radius:12px;font-size:13px;color:var(--muted)}
+    .kpi strong{color:var(--text)}
+    .tasks{display:grid;gap:12px}
+    .section-title{font-weight:600;margin:4px 0}
+    .task-list{display:grid;gap:6px}
+    .task{display:flex;align-items:center;gap:8px}
+    /* center checkbox with text */
+    .task input[type="checkbox"]{margin:0;transform:translateY(1px)}
+    .list{margin-top:8px}
+    .day{display:flex;align-items:start;gap:12px;padding:10px 8px;border-radius:12px;border:1px solid #252b37;margin-bottom:8px;background:#12151c;cursor:pointer}
+    .day.done{opacity:.65}
+    .date{width:120px;color:var(--muted);font-size:12px}
+    .title{font-weight:600}
+    .meta{color:var(--muted);font-size:12px}
+    .note-ind{font-size:14px;margin-left:6px}
+    .grow{flex:1}
+    .chip{display:inline-block;border:1px solid #2a2f3a;border-radius:999px;padding:2px 8px;font-size:12px;color:var(--muted);margin-top:6px}
+    .day .chip{margin-left:8px}
+    .progress{height:10px;border-radius:6px;background:#0f1218;border:1px solid #222836;overflow:hidden;margin-top:6px}
+    .bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .25s ease}
+    .notes{display:grid;gap:8px}
+    .notes textarea{width:100%;min-height:96px;resize:vertical;background:#0e1218;color:var(--text);border:1px solid #222833;border-radius:12px;padding:10px 12px;font-family:inherit}
+    .row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+    .saveStatus{color:var(--muted);font-size:12px}
+    .footer{color:var(--muted);font-size:12px;margin-top:16px}
+    @media (max-width:520px){.date{width:90px}.hdr{align-items:flex-start}}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header class="hdr">
+    <h1>Daily Training Checklist</h1>
+    <div class="controls">
+      <label>Week
+        <select id="weekSelect"></select>
+      </label>
+      <button class="primary" id="btnToday">Jump to Today</button>
+      <button id="btnReset">Reset Week</button>
+    </div>
+  </header>
+
+  <section class="panel today" id="todayPanel">
+    <div class="today-header">
+      <div>
+        <div class="title" id="todayTitle"></div>
+        <div class="meta" id="todayMeta"></div>
+      </div>
+      <label><input type="checkbox" id="todayDone" /> Completed</label>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">Phase: <strong id="todayPhase"></strong></div>
+      <div class="kpi">Week mileage: <strong id="todayMileage"></strong> mi</div>
+      <div class="kpi">Progress: <strong id="todayProgress"></strong></div>
+    </div>
+
+    <section class="tasks">
+      <div class="group">
+        <div class="section-title">Warm-up</div>
+        <div class="task-list" id="listWarmup"></div>
+      </div>
+      <div class="group">
+        <div class="section-title">Workout</div>
+        <label class="task"><input type="checkbox" id="workoutChk" /> <span id="workoutText"></span></label>
+      </div>
+      <div class="group">
+        <div class="section-title">Cool-down</div>
+        <div class="task-list" id="listCooldown"></div>
+      </div>
+    </section>
+
+    <div class="notes">
+      <label for="todayNote"><strong>Notes</strong></label>
+      <textarea id="todayNote" placeholder="How did it feel? Pace, HR, aches, weather, etc."></textarea>
+      <div class="row">
+        <div class="saveStatus" id="saveStatus">Idle</div>
+        <button id="btnClearNote">Clear Note</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3 style="margin-top:0">This Week</h3>
+    <div class="list" id="weekList"></div>
+  </section>
+
+  <div class="panel" style="margin-top:12px">
+    <div class="kpi">Progress: <strong id="progText">0/0 (0%)</strong></div>
+    <div class="progress"><div class="bar" id="progBar"></div></div>
+  </div>
+
+  <div class="footer">Data stored locally on this device with <code>localStorage</code>. You can safely refresh or go offline.</div>
+</div>
+
+<script>
+  let data = []
+  let byWeek = {}
+  let currentDayIndex = 0
+  let currentDay = null
+  let saveTimer = null
+
+  const weekSelect = document.getElementById('weekSelect')
+  const weekList = document.getElementById('weekList')
+  const progText = document.getElementById('progText')
+  const progBar = document.getElementById('progBar')
+
+  const todayTitle = document.getElementById('todayTitle')
+  const todayMeta = document.getElementById('todayMeta')
+  const todayPhase = document.getElementById('todayPhase')
+  const todayMileage = document.getElementById('todayMileage')
+  const todayProgress = document.getElementById('todayProgress')
+  const todayDone = document.getElementById('todayDone')
+  const listWarmup = document.getElementById('listWarmup')
+  const listCooldown = document.getElementById('listCooldown')
+  const workoutChk = document.getElementById('workoutChk')
+  const workoutText = document.getElementById('workoutText')
+  const todayNote = document.getElementById('todayNote')
+  const saveStatus = document.getElementById('saveStatus')
+
+  document.getElementById('btnToday').addEventListener('click', () => {
+    const idx = data.findIndex(d => d.date === todayLocalISO())
+    const target = idx >= 0 ? data[idx] : closestByDate(data, new Date())
+    weekSelect.value = target.week
+    renderWeek()
+    renderToday(data.findIndex(x => x.date === target.date))
+  })
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    if (!confirm('Clear completion for all tasks in this week?')) return
+    const w = Number(weekSelect.value)
+    for (const d of byWeek[w] || []) setAllDay(d, false)
+    renderWeek(); renderToday(currentDayIndex)
+  })
+
+  todayDone.addEventListener('change', () => {
+    if (!currentDay) return
+    setAllDay(currentDay, todayDone.checked)
+    renderToday(currentDayIndex); renderWeek()
+  })
+
+  todayNote.addEventListener('input', () => {
+    setSaveStatus('Saving…')
+    const val = todayNote.value
+    if (saveTimer) clearTimeout(saveTimer)
+    saveTimer = setTimeout(() => { setNote(currentDay.date, val.trim()); setSaveStatus(val.trim() ? 'Saved' : 'Cleared') }, 350)
+  })
+  document.getElementById('btnClearNote').addEventListener('click', () => {
+    todayNote.value = ''; setNote(currentDay.date, ''); setSaveStatus('Cleared')
+  })
+
+  window.addEventListener('storage', () => { renderWeek(); renderToday(currentDayIndex) })
+
+  ;(async function load(){
+    try {
+      const res = await fetch('workouts.json', { cache: 'no-store' })
+      if (!res.ok) throw new Error('HTTP '+res.status)
+      const txt = await res.text()
+      data = reweekBySundayEnd(JSON.parse(txt))
+    } catch (e) {
+      console.warn('Failed to load workouts.json, using sample', e)
+      data = reweekBySundayEnd(SAMPLE)
+    }
+
+    byWeek = groupBy(data, x => x.week)
+    // populate weeks
+    weekSelect.innerHTML = Object.keys(byWeek).map(w => `<option value="${w}">Week ${w}</option>`).join('')
+
+    // pick initial week/date: today if present, else first day
+    const tIdx = data.findIndex(d => d.date === todayLocalISO())
+    const initial = tIdx >= 0 ? data[tIdx] : data[0]
+    weekSelect.value = initial.week
+
+    weekSelect.addEventListener('change', () => { renderWeek(); const first = byWeek[Number(weekSelect.value)][0]; renderToday(data.findIndex(x=>x.date===first.date)) })
+
+    renderWeek(); renderToday(data.findIndex(x => x.date === initial.date))
+  })()
+
+  function renderToday(idx){
+    if (idx < 0) idx = 0
+    currentDayIndex = idx
+    const d = data[idx]
+    currentDay = d
+
+    todayTitle.textContent = `${formatDate(d.date)} • Week ${d.week}`
+    todayMeta.textContent = `${d.day} — ${d.phase}`
+    todayPhase.textContent = d.phase
+    todayMileage.textContent = d.weeklyMileage ?? ''
+
+    buildTaskList(listWarmup, splitTasks(d.warmup), d.date, 'warm')
+    workoutText.textContent = d.workout || 'Workout'
+    workoutChk.checked = getSub(d.date, 'workout', 0)
+    workoutChk.onchange = () => { setSub(d.date, 'workout', 0, workoutChk.checked); syncTodayCompletion(d) }
+    buildTaskList(listCooldown, splitTasks(d.cooldown), d.date, 'cool')
+
+    todayNote.value = getNote(d.date)
+    syncTodayCompletion(d)
+  }
+
+  function renderWeek(){
+    weekList.innerHTML = ''
+    const w = Number(weekSelect.value)
+    for (const d of byWeek[w] || []){
+      const li = document.createElement('div'); li.className = 'day'; li.dataset.date = d.date
+      const date = Object.assign(document.createElement('div'), { className:'date', textContent: formatDate(d.date) })
+      const main = Object.assign(document.createElement('div'), { className: 'grow' })
+      const title = Object.assign(document.createElement('div'), { className:'title', textContent: d.workout })
+      const meta = Object.assign(document.createElement('div'), { className:'meta', textContent: `${d.day} • ${d.phase}` })
+      if (getNote(d.date)) { const ind = document.createElement('span'); ind.className = 'note-ind'; ind.textContent = '📝'; meta.appendChild(ind) }
+      const chip = Object.assign(document.createElement('span'), { className: 'chip' })
+      main.append(title, meta, chip)
+      li.append(date, main)
+      li.addEventListener('click', () => { renderToday(data.findIndex(x=>x.date===d.date)); li.scrollIntoView({ behavior:'smooth', block:'nearest' }) })
+      weekList.append(li)
+      updateWeekRowMeta(d)
+    }
+    updateProgress()
+  }
+
+  function updateProgress(){
+    const w = Number(weekSelect.value)
+    const days = byWeek[w] || []
+    let done=0,total=0
+    for (const d of days){ const t = getDayTotals(d); done += t.done; total += t.total }
+    const pct = total ? Math.round((done/total)*100) : 0
+    progText.textContent = `${done}/${total} (${pct}%)`
+    progBar.style.width = pct + '%'
+  }
+
+  function setSaveStatus(s){ saveStatus.textContent = s }
+
+  // --- storage + helpers ---
+  function key(date){ return 'workoutDone:'+date }
+  function getDone(date){ return localStorage.getItem(key(date)) === '1' }
+  function setDone(date,val){ localStorage.setItem(key(date), val ? '1':'0') }
+  function noteKey(date){ return 'workoutNote:'+date }
+  function getNote(date){ return localStorage.getItem(noteKey(date)) || '' }
+  function setNote(date,val){ if(!val) localStorage.removeItem(noteKey(date)); else localStorage.setItem(noteKey(date), val) }
+
+  function subKey(date, section, idx){ return `sub:${date}:${section}:${idx}` }
+  function getSub(date, section, idx){ return localStorage.getItem(subKey(date,section,idx)) === '1' }
+  function setSub(date, section, idx, val){ localStorage.setItem(subKey(date,section,idx), val ? '1' : '0') }
+
+  function splitTasks(s){ return (s||'').split(';').map(x=>x.trim()).filter(Boolean) }
+  function getDayTotals(d){
+    const warm = splitTasks(d.warmup); const cool = splitTasks(d.cooldown)
+    const total = warm.length + 1 + cool.length
+    let done = 0
+    for (let i=0;i<warm.length;i++) if (getSub(d.date,'warm',i)) done++
+    if (getSub(d.date,'workout',0)) done++
+    for (let i=0;i<cool.length;i++) if (getSub(d.date,'cool',i)) done++
+    return { done, total }
+  }
+  function setAllDay(d, val){
+    const warm = splitTasks(d.warmup); const cool = splitTasks(d.cooldown)
+    for (let i=0;i<warm.length;i++) setSub(d.date,'warm',i,val)
+    setSub(d.date,'workout',0,val)
+    for (let i=0;i<cool.length;i++) setSub(d.date,'cool',i,val)
+    setDone(d.date, val)
+    updateWeekRowMeta(d)
+  }
+  function buildTaskList(container, items, date, section){
+    container.innerHTML=''
+    items.forEach((text, idx)=>{
+      const lbl = document.createElement('label'); lbl.className='task'
+      const cb = document.createElement('input'); cb.type='checkbox'; cb.checked = getSub(date, section, idx)
+      cb.addEventListener('change', ()=>{ setSub(date, section, idx, cb.checked); syncTodayCompletion(currentDay) })
+      const span = document.createElement('span'); span.textContent = text
+      lbl.append(cb, span); container.append(lbl)
+    })
+  }
+  function syncTodayCompletion(d){
+    const t = getDayTotals(d)
+    const completed = t.done === t.total && t.total>0
+    todayDone.checked = completed
+    setDone(d.date, completed)
+    updateWeekRowMeta(d)
+    updateProgress()
+  }
+  function updateWeekRowMeta(d){
+    const row = document.querySelector(`.day[data-date="${cssEscape(d.date)}"]`)
+    if (!row) return
+    const chip = row.querySelector('.chip')
+    const t = getDayTotals(d)
+    const completed = t.done === t.total && t.total>0
+    row.classList.toggle('done', completed)
+    if (chip){ chip.textContent = completed ? '✅ Completed' : `${t.done}/${t.total}` }
+  }
+
+  function groupBy(arr, f){ return arr.reduce((acc,x)=>{ const k=f(x); (acc[k]=acc[k]||[]).push(x); return acc },{}) }
+  function formatDate(iso){ const d=new Date(iso+'T00:00:00'); return d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}) }
+  function todayLocalISO(){ const d=new Date(); const y=d.getFullYear(); const m=String(d.getMonth()+1).padStart(2,'0'); const day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}` }
+  function cssEscape(s){ return s.replace(/["\\]/g, "\\$&") }
+  function closestByDate(arr, target){ const t=target.getTime(); let best=0, diff=Infinity; for(let i=0;i<arr.length;i++){ const d=Math.abs(new Date(arr[i].date).getTime()-t); if(d<diff){diff=d; best=i} } return arr[best] }
+
+  function dayOfWeek(iso){ return new Date(iso+'T00:00:00').getDay() }
+  // Recompute week numbers so weeks end on Sunday. Week 1 runs from first plan day -> Sunday; each Monday starts a new week.
+  function reweekBySundayEnd(plan){
+    const sorted = [...plan].sort((a,b)=> a.date.localeCompare(b.date))
+    let ui = 1
+    return sorted.map((d,i)=>{ const dow = dayOfWeek(d.date); if(i>0 && dow===1) ui+=1; return { ...d, week: ui } })
+  }
+
+  // minimal sample if workouts.json missing
+  const SAMPLE = [
+    {"week":1,"phase":"Recovery & Base","date":"2025-08-12","day":"Tue","workout":"Run/Walk: 1:2 min x 6–8 rounds (3 mi max)","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+    {"week":1,"phase":"Recovery & Base","date":"2025-08-13","day":"Wed","workout":"Strength & Mobility (30–40 min)","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+    {"week":1,"phase":"Recovery & Base","date":"2025-08-14","day":"Thu","workout":"Easy Run: 2 mi","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5}
+  ]
+</script>
+</body>
 </html>
