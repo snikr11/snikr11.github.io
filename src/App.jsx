@@ -5,7 +5,7 @@ export default function App(){
   const [error, setError] = useState('')
   const [week, setWeek] = useState(null)
   const [selectedDate, setSelectedDate] = useState(null)
-  const [tick, setTick] = useState(0) // rerender on storage changes
+  const [tick, setTick] = useState(0) // force rerender when storage changes
 
   // Load plan
   useEffect(() => {
@@ -21,14 +21,14 @@ export default function App(){
           console.error('Invalid JSON in workouts.json:', e, txt.slice(0,200))
           throw new Error('Invalid JSON in workouts.json')
         }
-        const plan = reweekBySundayEnd(json)
+        const plan = reweekBySundayEnd(json)       // <-- apply Sunday-ending weeks
         setData(plan)
-        setError('')
         initWeekAndDate(plan)
+        setError('')
       } catch (e) {
         console.warn('Failed to fetch workouts.json, using sample', e)
         setError('Could not load workouts.json – loaded sample data. Create /public/workouts.json to replace.')
-        const sample = reweekBySundayEnd(SAMPLE)
+        const sample = reweekBySundayEnd(SAMPLE)   // <-- apply to sample too
         setData(sample)
         initWeekAndDate(sample)
       }
@@ -38,27 +38,27 @@ export default function App(){
   function initWeekAndDate(plan){
     const todayISO = todayLocalISO()
     const idx = plan.findIndex(d => d.date === todayISO)
-    const first = plan[0]
-    const initial = idx >= 0 ? plan[idx] : first
-    setWeek(initial?.week ?? 1)
-    setSelectedDate(initial?.date ?? null)
+    const w = idx >= 0 ? plan[idx].week : plan[0]?.week ?? 1
+    setWeek(w)
+    setSelectedDate(idx >= 0 ? plan[idx].date : plan.find(d=>d.week===w)?.date)
   }
 
+  // expose grouped structure
   const byWeek = useMemo(() => groupBy(data ?? [], x => x.week), [data])
   const weeks = useMemo(() => Object.keys(byWeek).map(Number).sort((a,b)=>a-b), [byWeek])
 
-  // Selected day object
+  // Selected day
   const day = useMemo(() => (data ?? []).find(d => d.date === selectedDate) || null, [data, selectedDate])
 
-  // Keep selectedDate inside chosen week
+  // When week changes, make sure selected date stays in week
   useEffect(() => {
     if (!data || week == null) return
-    if (!byWeek[week]?.some(d => d.date === selectedDate)) {
+    if (!byWeek[week]?.some(d => d.date === selectedDate)){
       setSelectedDate(byWeek[week]?.[0]?.date ?? null)
     }
-  }, [week, data]) // eslint-disable-line
+  }, [week, data])
 
-  // listen to other tabs updating storage
+  // listen to storage changes from other tabs
   useEffect(() => {
     const handler = () => setTick(t => t+1)
     window.addEventListener('storage', handler)
@@ -105,7 +105,10 @@ export default function App(){
         <TodayPanel
           key={day.date}
           day={day}
-          onSubtaskChange={() => setTick(t => t+1)}
+          onSubtaskChange={() => {
+            // Keep Completed checkbox and chip in sync
+            setTick(t => t+1)
+          }}
         />
       ) : <Notice>No day selected.</Notice>}
 
@@ -119,11 +122,12 @@ export default function App(){
         <div className="kpi">Progress: <strong>{progress.done}/{progress.total} ({progress.pct}%)</strong></div>
         <div className="progress"><div className="bar" style={{width: progress.pct+'%'}}/></div>
       </div>
+
     </Shell>
   )
 }
 
-function Header({ weeks, week, onWeekChange, onJumpToday, onResetWeek }) {
+function Header({ weeks, week, onWeekChange, onJumpToday, onResetWeek }){
   return (
     <header className="hdr">
       <h1>Daily Training Checklist</h1>
@@ -145,6 +149,7 @@ function TodayPanel({ day, onSubtaskChange }){
   const [status, setStatus] = useState('Idle')
   const [stamp, setStamp] = useState(0) // re-render when toggling subtasks
 
+  // rebuild UI when day changes
   useEffect(() => {
     setNoteState(getNote(day.date))
     setStatus('Idle')
@@ -187,6 +192,7 @@ function TodayPanel({ day, onSubtaskChange }){
                 <input type="checkbox" checked={getSub(day.date,'warm',i)} onChange={e=>{
                   setSub(day.date,'warm',i,e.target.checked); setStamp(s=>s+1); onSubtaskChange?.()
                 }} /> <span>{t}</span>
+                <a className="help" href={videoUrl(t)} target="_blank" rel="noopener noreferrer" title="How-to video">how-to ▶</a>
               </label>
             ))}
           </div>
@@ -198,6 +204,7 @@ function TodayPanel({ day, onSubtaskChange }){
             <input type="checkbox" checked={getSub(day.date,'workout',0)} onChange={e=>{
               setSub(day.date,'workout',0,e.target.checked); setStamp(s=>s+1); onSubtaskChange?.()
             }} /> <span>{day.workout}</span>
+            <a className="help" href={videoUrl(day.workout)} target="_blank" rel="noopener noreferrer" title="How-to video">how-to ▶</a>
           </label>
         </div>
 
@@ -209,6 +216,7 @@ function TodayPanel({ day, onSubtaskChange }){
                 <input type="checkbox" checked={getSub(day.date,'cool',i)} onChange={e=>{
                   setSub(day.date,'cool',i,e.target.checked); setStamp(s=>s+1); onSubtaskChange?.()
                 }} /> <span>{t}</span>
+                <a className="help" href={videoUrl(t)} target="_blank" rel="noopener noreferrer" title="How-to video">how-to ▶</a>
               </label>
             ))}
           </div>
@@ -223,7 +231,7 @@ function TodayPanel({ day, onSubtaskChange }){
           const val = e.target.value
           setNoteState(val)
           if (noteTimer) clearTimeout(noteTimer)
-          noteTimer = setTimeout(()=>{ setNote(day.date, val.trim()); setStatus(val.trim() ? 'Saved' : 'Cleared') }, 350)
+          noteTimer = setTimeout(()=>{ setNote(day.date, val.trim()); setStatus(val.trim() ? 'Saved' : 'Cleared'); }, 350)
         }} />
         <div className="row">
           <div className="saveStatus">{status}</div>
@@ -271,7 +279,7 @@ function Shell({ children }){
 
 function Notice({ children }){ return <div className="panel" style={{borderColor:'#444', color:'#9aa4b2'}}>{children}</div> }
 
-/* ========= storage & helpers ========= */
+// --- storage helpers & utils ---
 function key(date){ return 'workoutDone:' + date }
 function getDone(date){ return localStorage.getItem(key(date)) === '1' }
 function setDone(date, val){ localStorage.setItem(key(date), val ? '1' : '0') }
@@ -279,7 +287,7 @@ function noteKey(date){ return 'workoutNote:' + date }
 function getNote(date){ return localStorage.getItem(noteKey(date)) || '' }
 function setNote(date, val){ if (!val) localStorage.removeItem(noteKey(date)); else localStorage.setItem(noteKey(date), val) }
 
-// Subtasks
+// Subtask helpers
 function subKey(date, section, idx){ return `sub:${date}:${section}:${idx}` }
 function getSub(date, section, idx){ return localStorage.getItem(subKey(date, section, idx)) === '1' }
 function setSub(date, section, idx, val){ localStorage.setItem(subKey(date, section, idx), val ? '1' : '0') }
@@ -313,22 +321,23 @@ function groupBy(arr, f){ return arr.reduce((acc, x)=>{ const k=f(x); (acc[k]=ac
 function formatDate(iso){ const d=new Date(iso+'T00:00:00'); return d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}) }
 function todayLocalISO(){ const d=new Date(); const y=d.getFullYear(); const m=String(d.getMonth()+1).padStart(2,'0'); const day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}` }
 function closestByDate(arr, target){ const t=target.getTime(); let best=0, diff=Infinity; for(let i=0;i<arr.length;i++){ const d=Math.abs(new Date(arr[i].date).getTime()-t); if(d<diff){diff=d; best=i} } return arr[best] }
+function videoUrl(text){ return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(text + ' exercise how to') }
 
 // Week recompute: end on Sunday; Week 1 = first day -> Sunday, then Mon->Sun
-function dayOfWeek(iso){ return new Date(iso+'T00:00:00').getDay() } // 0=Sun, 1=Mon
+function dayOfWeek(iso){ return new Date(iso+'T00:00:00').getDay() } // 0=Sun, 1=Mon, ...
 function reweekBySundayEnd(plan){
   const sorted = [...plan].sort((a,b)=> a.date.localeCompare(b.date))
   let ui = 1
-  return sorted.map((d,i) => {
+  return sorted.map((d, i) => {
     const dow = dayOfWeek(d.date)
-    if (i > 0 && dow === 1) ui += 1  // each Monday starts a new UI week
+    if (i>0 && dow === 1) ui += 1
     return { ...d, week: ui }
   })
 }
 
-// Minimal fallback sample
+// Fallback sample
 const SAMPLE = [
-  {"week":1,"phase":"Recovery & Base","date":"2025-08-12","day":"Tue","workout":"Run/Walk: 1:2 min x 6–8 rounds (3 mi max)","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
-  {"week":1,"phase":"Recovery & Base","date":"2025-08-13","day":"Wed","workout":"Strength & Mobility (30–40 min)","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
-  {"week":1,"phase":"Recovery & Base","date":"2025-08-14","day":"Thu","workout":"Easy Run: 2 mi","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Leg Swings side/side 10/leg; Hip Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch (straight knee) L/R; Bent-Knee Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5}
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-12","day":"Tue","workout":"Run/Walk: 1:2 min x 6–8 rounds (3 mi max)","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-13","day":"Wed","workout":"Strength & Mobility (30–40 min)","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5},
+  {"week":1,"phase":"Recovery & Base","date":"2025-08-14","day":"Thu","workout":"Easy Run: 2 mi","warmup":"Walking Quad Pull 10/leg; Leg Swings front/back 10/leg; Arm Circles 5 each way; Calf Rock-Backs 10/leg; Glute Bridges 10 reps","cooldown":"Standing Quad Stretch L/R; Figure-4 Stretch L/R; Hamstring Stretch L/R; Calf Stretch L/R; Hip Flexor Lunge Stretch L/R","weeklyMileage":5}
 ]
