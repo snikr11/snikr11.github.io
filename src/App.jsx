@@ -13,9 +13,17 @@ export default function App(){
       try {
         const res = await fetch('workouts.json', { cache: 'no-store' })
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        const json = await res.json()
+        const txt = await res.text()
+        let json
+        try {
+          json = JSON.parse(txt)
+        } catch (e) {
+          console.error('Invalid JSON in workouts.json:', e, txt.slice(0,200))
+          throw new Error('Invalid JSON in workouts.json')
+        }
         setData(json)
         initWeekAndDate(json)
+        setError('')
       } catch (e) {
         console.warn('Failed to fetch workouts.json, using sample', e)
         setError('Could not load workouts.json – loaded sample data. Create /public/workouts.json to replace.')
@@ -308,6 +316,18 @@ function groupBy(arr, f){ return arr.reduce((acc, x)=>{ const k=f(x); (acc[k]=ac
 function formatDate(iso){ const d=new Date(iso+'T00:00:00'); return d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}) }
 function todayLocalISO(){ const d=new Date(); const y=d.getFullYear(); const m=String(d.getMonth()+1).padStart(2,'0'); const day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}` }
 function closestByDate(arr, target){ const t=target.getTime(); let best=0, diff=Infinity; for(let i=0;i<arr.length;i++){ const d=Math.abs(new Date(arr[i].date).getTime()-t); if(d<diff){diff=d; best=i} } return arr[best] }
+
+function dayOfWeek(iso){ return new Date(iso+'T00:00:00').getDay() }
+// Recompute week numbers so weeks end on Sunday. Week 1 runs from the first plan day up to the first Sunday; each Monday starts a new week.
+function reweekBySundayEnd(plan){
+  const sorted = [...plan].sort((a,b)=> a.date.localeCompare(b.date))
+  let ui = 1
+  return sorted.map((d, i) => {
+    const dow = dayOfWeek(d.date) // 0=Sun, 1=Mon, ...
+    if (i>0 && dow === 1) ui += 1
+    return { ...d, week: ui }
+  })
+}
 
 // Fallback sample
 const SAMPLE = [
