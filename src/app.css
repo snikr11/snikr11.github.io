@@ -120,4 +120,6 @@ button:disabled { opacity: .6; }
 @media (max-width: 520px) {
   .date { width: 90px; }
   .hdr { align-items: flex-start; }
-}
+  }
+.help{display:inline-block;font-size:12px;opacity:.85;margin-left:6px;border:1px solid #2a2f3a;padding:0 8px;border-radius:999px}
+.help:hover{opacity:1}
